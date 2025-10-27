@@ -2,14 +2,13 @@
 
 A modern, intuitive web application designed to help students and professionals manage their time effectively, build consistent habits, and achieve their goals through data-driven insights.
 
-![FlowState Banner](https://img.shields.io/badge/FlowState-Productivity%20Dashboard-667eea?style=for-the-badge)
 
 ## ✨ Features
 
 - **⏱️ Time Tracker** - Track focus sessions with a beautiful, intuitive timer
 - **📅 Habit Tracker** - Build positive habits with daily progress tracking
-- **� Stattistics Dashboard** - Visualize your productivity with insightful charts
-- **� Notes t& Journal** - Keep organized notes and journal entries
+- **📶 Statistics Dashboard** - Visualize your productivity with insightful charts
+- **📝 Notes & Journal** - Keep organized notes and journal entries
 - **🏆 Productivity Score** - Get real-time feedback on your daily performance
 - **📱 Responsive** - Perfect experience on desktop, tablet, and mobile
 
@@ -54,7 +53,7 @@ FlowState/
 
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
 - **Storage**: LocalStorage for data persistence
-- **Design**: Responsive Design
+- **Design**: Responsive Design (Vanilla CSS)
 - **Typography**: Poppins (Google Fonts)
 
 ## 👥 Team
@@ -65,9 +64,9 @@ FlowState/
 - **Somiya Khani** - UI/UX Designer
 
 
-
+## Working Prototype
 - **Project Link**: [https://github.com/Priyanshu-bisht-me/Flow_State](https://github.com/Priyanshu-bisht-me/Flow_State)
-- **Live Demo**: [https://priyanshu-bisht-me.github.io/Flow_State](https://priyanshu-bisht-me.github.io/Flow_State)
+- **Live Demo**: [https://Priyanshu-bisht-me.github.io/Flow_State](https://Priyanshu-bisht-me.github.io/Flow_State)
 
 ---
 
@@ -75,5 +74,5 @@ FlowState/
 
 **Made with ❤️ by Priyanshu Bisht**
 
-[⭐ Star this repo](https://github.com/Priyanshu-bisht-me/Flow_State) |
+[⭐ Star this repo](https://github.com/Priyanshu-bisht-me/Flow_State)
 </div>
