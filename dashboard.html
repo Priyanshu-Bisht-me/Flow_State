@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FlowState</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>FlowState</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                    <li><a href="#" class="nav-link" data-section="time-tracker">Time Tracker</a></li>
+                    <li><a href="#" class="nav-link" data-section="habits">Habits</a></li>
+                    <li><a href="#" class="nav-link" data-section="stats">Stats</a></li>
+                    <li><a href="#" class="nav-link" data-section="notes">Notes</a></li>
+                    <li><a href="index.html" class="nav-link logout">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+      
+        <main class="main-content">
+          
+            <section id="dashboard" class="content-section active">
+                <header class="section-header">
+                    <h1>Dashboard</h1>
+                    <p>Welcome to your productivity dashboard</p>
+                </header>
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <h3>Today's Focus Time</h3>
+                        <div class="card-content">
+                            <span class="card-value" id="today-time">0h 0m</span>
+                            <p>Total time tracked today</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Habits Completed</h3>
+                        <div class="card-content">
+                            <span class="card-value" id="today-habits">0/0</span>
+                            <p>Habits completed today</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Notes</h3>
+                        <div class="card-content">
+                            <span class="card-value" id="total-notes">0</span>
+                            <p>Total notes saved</p>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>Productivity Score</h3>
+                        <div class="card-content">
+                            <span class="card-value" id="productivity-score">0%</span>
+                            <p>Based on your activity</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div id="activity-list" class="activity-list">
+                        
+                    </div>
+                </div>
+            </section>
+
+       
+            <section id="time-tracker" class="content-section">
+                <header class="section-header">
+                    <h1>Time Tracker</h1>
+                    <p>Track your focus sessions</p>
+                </header>
+                <div class="time-tracker-container">
+                    <div class="timer-display">
+                        <div id="timer" class="timer">00:00:00</div>
+                        <div class="timer-controls">
+                            <button id="start-btn" class="timer-btn start">Start</button>
+                            <button id="pause-btn" class="timer-btn pause" disabled>Pause</button>
+                            <button id="reset-btn" class="timer-btn reset">Reset</button>
+                        </div>
+                    </div>
+                    <div class="session-history">
+                        <h3>Today's Sessions</h3>
+                        <div id="session-list" class="session-list">
+                           
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section id="habits" class="content-section">
+                <header class="section-header">
+                    <h1>Habit Tracker</h1>
+                    <p>Build positive habits</p>
+                </header>
+                <div class="habits-container">
+                    <div class="add-habit">
+                        <input type="text" id="habit-input" placeholder="Enter a new habit (e.g., Read for 30 mins)">
+                        <button id="add-habit-btn">Add Habit</button>
+                    </div>
+                    <div class="habits-list">
+                        <h3>Your Habits</h3>
+                        <div id="habits-container">
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="stats" class="content-section">
+                <header class="section-header">
+                    <h1>Statistics</h1>
+                    <p>View your productivity insights</p>
+                </header>
+                <div class="stats-container">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Time Tracking</h3>
+                            <div class="stat-content">
+                                <div class="stat-item">
+                                    <span class="stat-label">Today</span>
+                                    <span class="stat-value" id="stat-today">0h 0m</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">This Week</span>
+                                    <span class="stat-value" id="stat-week">0h 0m</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">All Time</span>
+                                    <span class="stat-value" id="stat-all">0h 0m</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Habit Completion</h3>
+                            <div class="stat-content">
+                                <div class="progress-container">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="habit-progress" style="width: 0%"></div>
+                                    </div>
+                                    <span class="progress-text" id="habit-percentage">0%</span>
+                                </div>
+                                <p>Average completion rate</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Weekly Activity</h3>
+                        <div class="chart-placeholder">
+                            <p>Weekly activity visualization would appear here</p>
+                            <p><small>(In a full implementation, this would use Chart.js)</small></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section id="notes" class="content-section">
+                <header class="section-header">
+                    <h1>Notes & Journal</h1>
+                    <p>Save your thoughts and ideas</p>
+                </header>
+                <div class="notes-container">
+                    <div class="note-editor">
+                        <textarea id="note-text" placeholder="Write your note here..."></textarea>
+                        <div class="note-actions">
+                            <button id="save-note-btn">Save Note</button>
+                            <button id="clear-note-btn">Clear</button>
+                        </div>
+                    </div>
+                    <div class="notes-list">
+                        <h3>Your Notes</h3>
+                        <div id="notes-list-container">
+                            <!-- Note items will be added here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
