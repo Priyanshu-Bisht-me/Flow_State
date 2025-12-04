@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowState - Time Tracker & Personal Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <h1 class="app-logo">
+                    <i class="fas fa-circle-play"></i> FlowState
+                </h1>
+            </div>
+            <div class="top-bar-center">
+                <span class="current-date" id="currentDate">December 3, 2025</span>
+                <span class="today-focus">Today's focus: <span id="todayFocusTime">0h 00m</span></span>
+            </div>
+            <div class="top-bar-right">
+                <button class="user-avatar" id="userMenuBtn">
+                    <img src="https://via.placeholder.com/32" alt="User Avatar">
+                </button>
+                <button class="btn btn-primary" id="startFocusBtn">
+                    <i class="fas fa-play"></i> Start Focus
+                </button>
+            </div>
+        </header>
+
+        <div class="main-wrapper">
+            <!-- Left Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-item active" data-page="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="tasks">
+                        <i class="fas fa-tasks"></i>
+                        <span>Tasks</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="focus">
+                        <i class="fas fa-hourglass-start"></i>
+                        <span>Focus Session</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="history">
+                        <i class="fas fa-history"></i>
+                        <span>History</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="settings">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                
+                <!-- Dashboard Page -->
+                <section id="dashboard-page" class="page active">
+                    <!-- Section A: Summary Cards -->
+                    <div class="summary-cards">
+                        <div class="card card-summary">
+                            <h3>Today's Focus Time</h3>
+                            <div class="card-big-number" id="todayFocusCard">0h 00m</div>
+                            <p class="card-subtext">Goal: 3h 00m</p>
+                        </div>
+                        <div class="card card-summary">
+                            <h3>Sessions Completed</h3>
+                            <div class="card-big-number">3</div>
+                            <p class="card-subtext">Avg length: 42 min</p>
+                        </div>
+                        <div class="card card-summary">
+                            <h3>This Week</h3>
+                            <div class="card-big-number">12h 30m</div>
+                            <p class="card-subtext">Streak: 4 days</p>
+                        </div>
+                        <div class="card card-summary">
+                            <h3>Top Project Today</h3>
+                            <div class="card-big-number">Design System</div>
+                            <p class="card-subtext">4h 25m</p>
+                        </div>
+                    </div>
+
+                    <!-- Section B: Charts Row -->
+                    <div class="charts-row">
+                        <div class="card card-chart">
+                            <h3>Focus by Day (This Week)</h3>
+                            <canvas id="focusByDayChart" style="max-height: 250px;"></canvas>
+                        </div>
+                        <div class="card card-chart">
+                            <h3>Time by Project</h3>
+                            <canvas id="timeByProjectChart" style="max-height: 250px;"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="charts-row">
+                        <div class="card card-chart">
+                            <h3>Session Trend</h3>
+                            <canvas id="sessionTrendChart" style="max-height: 250px;"></canvas>
+                        </div>
+                        <div class="card card-chart">
+                            <h3>Session Length Distribution</h3>
+                            <canvas id="sessionDistChart" style="max-height: 250px;"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Section C: Lists Row -->
+                    <div class="lists-row">
+                        <div class="card card-list">
+                            <h3>Next Up</h3>
+                            <div class="task-list">
+                                <div class="task-item">
+                                    <div class="task-info">
+                                        <p class="task-name">Design dashboard mockups</p>
+                                        <p class="task-project">Design System</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary">Start</button>
+                                </div>
+                                <div class="task-item">
+                                    <div class="task-info">
+                                        <p class="task-name">Implement timer component</p>
+                                        <p class="task-project">Development</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary">Start</button>
+                                </div>
+                                <div class="task-item">
+                                    <div class="task-info">
+                                        <p class="task-name">Review API documentation</p>
+                                        <p class="task-project">Documentation</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary">Start</button>
+                                </div>
+                                <div class="task-item">
+                                    <div class="task-info">
+                                        <p class="task-name">Update color palette</p>
+                                        <p class="task-project">Design System</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary">Start</button>
+                                </div>
+                                <div class="task-item">
+                                    <div class="task-info">
+                                        <p class="task-name">Fix responsive layout issues</p>
+                                        <p class="task-project">Development</p>
+                                    </div>
+                                    <button class="btn btn-sm btn-primary">Start</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card card-list">
+                            <h3>Recent Sessions</h3>
+                            <div class="sessions-list">
+                                <div class="session-item">
+                                    <div class="session-info">
+                                        <p class="session-task">Implement timer component</p>
+                                        <p class="session-duration">45 min</p>
+                                    </div>
+                                    <div class="session-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                                <div class="session-item">
+                                    <div class="session-info">
+                                        <p class="session-task">Design dashboard mockups</p>
+                                        <p class="session-duration">60 min</p>
+                                    </div>
+                                    <div class="session-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="session-item">
+                                    <div class="session-info">
+                                        <p class="session-task">Review API documentation</p>
+                                        <p class="session-duration">30 min</p>
+                                    </div>
+                                    <div class="session-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <div class="session-item">
+                                    <div class="session-info">
+                                        <p class="session-task">Update color palette</p>
+                                        <p class="session-duration">45 min</p>
+                                    </div>
+                                    <div class="session-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                                <div class="session-item">
+                                    <div class="session-info">
+                                        <p class="session-task">Fix responsive layout issues</p>
+                                        <p class="session-duration">50 min</p>
+                                    </div>
+                                    <div class="session-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Tasks Page -->
+                <section id="tasks-page" class="page">
+                    <div class="page-header">
+                        <h2>Tasks & Projects</h2>
+                        <div class="page-controls">
+                            <select class="form-select" id="projectFilter">
+                                <option value="">All Projects</option>
+                                <option value="design">Design System</option>
+                                <option value="dev">Development</option>
+                                <option value="docs">Documentation</option>
+                            </select>
+                            <input type="text" class="form-input" placeholder="Search tasks...">
+                            <button class="btn btn-primary" id="newTaskBtn">
+                                <i class="fas fa-plus"></i> New Task
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tasks-body">
+                        <div class="card projects-sidebar">
+                            <h3>Projects</h3>
+                            <div class="projects-controls">
+                                <button class="btn btn-sm btn-primary" id="newProjectBtn"><i class="fas fa-plus"></i> New Project</button>
+                            </div>
+                            <div class="projects-list">
+                                <div class="project-item active">
+                                    <p class="project-name">Design System</p>
+                                    <p class="project-time">12h 30m</p>
+                                </div>
+                                <div class="project-item">
+                                    <p class="project-name">Development</p>
+                                    <p class="project-time">8h 45m</p>
+                                </div>
+                                <div class="project-item">
+                                    <p class="project-name">Documentation</p>
+                                    <p class="project-time">3h 20m</p>
+                                </div>
+                                <div class="project-item">
+                                    <p class="project-name">Testing</p>
+                                    <p class="project-time">5h 15m</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card tasks-table-container">
+                            <table class="tasks-table">
+                                <thead>
+                                    <tr>
+                                        <th>Task Name</th>
+                                        <th>Project</th>
+                                        <th>Status</th>
+                                        <th>Focus Time</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Design dashboard mockups</td>
+                                        <td>Design System</td>
+                                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                                        <td>4h 25m</td>
+                                        <td><button class="btn btn-sm btn-primary">Resume</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Implement timer component</td>
+                                        <td>Development</td>
+                                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                                        <td>3h 10m</td>
+                                        <td><button class="btn btn-sm btn-primary">Resume</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Review API documentation</td>
+                                        <td>Documentation</td>
+                                        <td><span class="status-badge status-done">Done</span></td>
+                                        <td>2h 45m</td>
+                                        <td><button class="btn btn-sm btn-secondary">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Update color palette</td>
+                                        <td>Design System</td>
+                                        <td><span class="status-badge status-done">Done</span></td>
+                                        <td>3h 20m</td>
+                                        <td><button class="btn btn-sm btn-secondary">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fix responsive layout issues</td>
+                                        <td>Development</td>
+                                        <td><span class="status-badge status-todo">To Do</span></td>
+                                        <td>0h 00m</td>
+                                        <td><button class="btn btn-sm btn-primary">Start</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Write unit tests</td>
+                                        <td>Testing</td>
+                                        <td><span class="status-badge status-todo">To Do</span></td>
+                                        <td>0h 00m</td>
+                                        <td><button class="btn btn-sm btn-primary">Start</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Focus Session Page -->
+                <section id="focus-page" class="page">
+                    <div class="focus-container">
+                        <div class="card focus-panel flow-card">
+                            <div class="flow-top">
+                                <div class="flow-task">
+                                    <label for="taskSelect">Select Task</label>
+                                    <select id="taskSelect" class="form-select">
+                                        <option value="">Choose a task...</option>
+                                    </select>
+                                </div>
+                                <div class="flow-controls-compact">
+                                    <div class="mode-toggle">
+                                        <button class="mode-btn active" data-mode="countdown">Countdown</button>
+                                        <button class="mode-btn" data-mode="flowtime">Flowtime</button>
+                                    </div>
+
+                                    <div class="session-length" id="sessionLengthControl" style="margin-top:8px;">
+                                        <label for="sessionLength">Session Length</label>
+                                        <div style="display: flex; gap: 8px;">
+                                            <select id="sessionLength" class="form-select">
+                                                <option value="15">15 minutes</option>
+                                                <option value="25" selected>25 minutes</option>
+                                                <option value="45">45 minutes</option>
+                                                <option value="60">60 minutes</option>
+                                            </select>
+                                            <div style="display: flex; gap: 4px;">
+                                                <input type="number" id="customMinutes" class="form-input" placeholder="Custom" min="1" max="180" style="width: 80px;">
+                                                <button class="btn btn-sm btn-secondary" id="setCustomBtn">Set</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flow-body">
+                                <div class="progress-ring-wrap">
+                                    <svg class="progress-ring" width="220" height="220">
+                                        <circle class="ring-bg" cx="110" cy="110" r="96" stroke-width="12" fill="none"></circle>
+                                        <circle class="ring" cx="110" cy="110" r="96" stroke-width="12" fill="none" stroke-linecap="round"></circle>
+                                    </svg>
+                                    <div class="flow-timer-center">
+                                        <div id="flowTimerDisplay" class="flow-timer">25:00</div>
+                                        <div class="flow-sub" id="flowSubText">Ready to Flow</div>
+                                    </div>
+                                </div>
+
+                                <div class="flow-side">
+                                    <div class="flow-info-row">
+                                        <div>Project</div>
+                                        <div id="projectDisplay">-</div>
+                                    </div>
+                                    <div class="flow-info-row">
+                                        <div>Expected End</div>
+                                        <div id="endTimeDisplay">-</div>
+                                    </div>
+                                    <div class="flow-info-row">
+                                        <div>Break</div>
+                                        <div id="breakDisplay">After this session</div>
+                                    </div>
+
+                                    <div class="flow-meter">
+                                        <label>Flow Meter</label>
+                                        <div class="meter-bar" id="flowMeter"><div class="meter-fill" style="width:0%"></div></div>
+                                    </div>
+
+                                    <div class="distraction-counter">
+                                        <label>Distractions</label>
+                                        <div class="distraction-controls">
+                                            <button class="btn btn-sm" id="decrDistraction">-</button>
+                                            <div id="distractionCount">0</div>
+                                            <button class="btn btn-sm" id="incrDistraction">+</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="flow-buttons">
+                                        <button class="btn btn-lg btn-primary" id="startBtn">
+                                            <i class="fas fa-play"></i> Start
+                                        </button>
+                                        <button class="btn btn-lg btn-secondary" id="pauseBtn" disabled>
+                                            <i class="fas fa-pause"></i> Pause
+                                        </button>
+                                        <button class="btn btn-lg btn-danger" id="stopBtn" disabled>
+                                            <i class="fas fa-stop"></i> Stop
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Session Complete Modal (hidden by default) -->
+                    <div id="sessionModal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <h2>How was this session?</h2>
+
+                            <div class="focus-rating">
+                                <label>Focus Rating</label>
+                                <div class="star-rating" id="starRating">
+                                    <i class="fas fa-star" data-rating="1"></i>
+                                    <i class="fas fa-star" data-rating="2"></i>
+                                    <i class="fas fa-star" data-rating="3"></i>
+                                    <i class="fas fa-star" data-rating="4"></i>
+                                    <i class="fas fa-star" data-rating="5"></i>
+                                </div>
+                                <p id="ratingText">Select a rating</p>
+                            </div>
+
+                            <div class="distractions-tags">
+                                <label>Distractions (optional)</label>
+                                <div class="tags">
+                                    <button class="tag-btn" data-tag="social">
+                                        <i class="fas fa-tag"></i> Social Media
+                                    </button>
+                                    <button class="tag-btn" data-tag="meetings">
+                                        <i class="fas fa-tag"></i> Meetings
+                                    </button>
+                                    <button class="tag-btn" data-tag="tired">
+                                        <i class="fas fa-tag"></i> Tired
+                                    </button>
+                                    <button class="tag-btn" data-tag="interruptions">
+                                        <i class="fas fa-tag"></i> Interruptions
+                                    </button>
+                                    <button class="tag-btn" data-tag="other">
+                                        <i class="fas fa-tag"></i> Other
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="session-notes">
+                                <label for="sessionNotes">Notes</label>
+                                <textarea id="sessionNotes" placeholder="What went well? What could improve?"></textarea>
+                            </div>
+
+                            <div class="modal-buttons">
+                                <button class="btn btn-secondary" id="skipBtn">Skip</button>
+                                <button class="btn btn-primary" id="saveSessionBtn">Save Session</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- History / Insights Page -->
+                <section id="history-page" class="page">
+                    <div class="page-header">
+                        <h2>History & Insights</h2>
+                        <div class="page-controls">
+                            <input type="date" class="form-input" id="dateFrom">
+                            <span>to</span>
+                            <input type="date" class="form-input" id="dateTo">
+                            <select class="form-select" id="historyProjectFilter">
+                                <option value="">All Projects</option>
+                                <option value="design">Design System</option>
+                                <option value="dev">Development</option>
+                                <option value="docs">Documentation</option>
+                            </select>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="focusSessionsOnly">
+                                Only focus sessions
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="history-body">
+                        <div class="card sessions-history">
+                            <h3>Sessions</h3>
+                            <div class="sessions-grouped">
+                                <div class="day-group">
+                                    <h4>December 3, 2025</h4>
+                                    <div class="session-row">
+                                        <div class="session-main">
+                                            <p class="session-task">Implement timer component</p>
+                                            <p class="session-duration">45 min</p>
+                                        </div>
+                                        <div class="session-rating-small">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <button class="btn btn-sm btn-secondary">
+                                            <i class="fas fa-note-sticky"></i>
+                                        </button>
+                                    </div>
+                                    <div class="session-row">
+                                        <div class="session-main">
+                                            <p class="session-task">Design dashboard mockups</p>
+                                            <p class="session-duration">60 min</p>
+                                        </div>
+                                        <div class="session-rating-small">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <button class="btn btn-sm btn-secondary">
+                                            <i class="fas fa-note-sticky"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="day-group">
+                                    <h4>December 2, 2025</h4>
+                                    <div class="session-row">
+                                        <div class="session-main">
+                                            <p class="session-task">Review API documentation</p>
+                                            <p class="session-duration">30 min</p>
+                                        </div>
+                                        <div class="session-rating-small">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <button class="btn btn-sm btn-secondary">
+                                            <i class="fas fa-note-sticky"></i>
+                                        </button>
+                                    </div>
+                                    <div class="session-row">
+                                        <div class="session-main">
+                                            <p class="session-task">Update color palette</p>
+                                            <p class="session-duration">45 min</p>
+                                        </div>
+                                        <div class="session-rating-small">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <button class="btn btn-sm btn-secondary">
+                                            <i class="fas fa-note-sticky"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="insights-column">
+                            <div class="card insight-card">
+                                <h3>Best Focus Time</h3>
+                                <div class="insight-value">9:00 AM - 11:00 AM</div>
+                                <p class="insight-text">Your most productive hours</p>
+                            </div>
+
+                            <div class="card insight-card">
+                                <h3>Average Session Length</h3>
+                                <div class="insight-value">45 min</div>
+                                <p class="insight-text">Slightly above recommended 25-50 min</p>
+                            </div>
+
+                            <div class="card insight-card">
+                                <h3>Most Focused Day</h3>
+                                <div class="insight-value">Wednesday</div>
+                                <p class="insight-text">Avg rating: 4.5 / 5 stars</p>
+                            </div>
+
+                            <div class="card insight-card">
+                                <h3>Total This Month</h3>
+                                <div class="insight-value">156h 30m</div>
+                                <p class="insight-text">56 sessions completed</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Page -->
+                <section id="settings-page" class="page">
+                    <h2>Settings</h2>
+
+                    <div class="settings-grid">
+                        <div class="card settings-section">
+                            <h3>Profile</h3>
+                            <div class="settings-form">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName" class="form-input" value="Priya Sharma">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-input" value="priya@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="avatar">Avatar</label>
+                                    <input type="file" id="avatar" class="form-input">
+                                    <p class="form-hint">JPG or PNG, max 2MB</p>
+                                </div>
+                                <button class="btn btn-primary">Save Profile</button>
+                            </div>
+                        </div>
+
+                        <div class="card settings-section">
+                            <h3>Preferences</h3>
+                            <div class="settings-form">
+                                <div class="form-group">
+                                    <label for="defaultSession">Default Session Length</label>
+                                    <select id="defaultSession" class="form-select">
+                                        <option value="15">15 minutes</option>
+                                        <option value="25" selected>25 minutes</option>
+                                        <option value="45">45 minutes</option>
+                                        <option value="60">60 minutes</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="workHours">Work Hours Start</label>
+                                    <input type="time" id="workHours" class="form-input" value="09:00">
+                                </div>
+                                <div class="form-group">
+                                    <label for="theme">Theme</label>
+                                    <select id="theme" class="form-select">
+                                        <option value="light" selected>Light</option>
+                                        <option value="dark">Dark</option>
+                                        <option value="system">System</option>
+                                    </select>
+                                </div>
+                                <div class="form-group checkbox">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" checked>
+                                        Enable notifications
+                                    </label>
+                                </div>
+                                <div class="form-group checkbox">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" checked>
+                                        Sound alerts
+                                    </label>
+                                </div>
+                                <button class="btn btn-primary">Save Preferences</button>
+                            </div>
+                        </div>
+
+                        <div class="card settings-section">
+                            <h3>Data & Privacy</h3>
+                            <div class="settings-form">
+                                <button class="btn btn-secondary" id="exportDataBtn">
+                                    <i class="fas fa-download"></i> Export My Data
+                                </button>
+                                <button class="btn btn-secondary" id="resetDataBtn">
+                                    <i class="fas fa-refresh"></i> Reset to Defaults
+                                </button>
+                                <p class="form-hint">Clears all data and reinitializes with sample projects.</p>
+                                <button class="btn btn-danger" id="deleteDataBtn">
+                                    <i class="fas fa-trash"></i> Delete All Data
+                                </button>
+                                <button class="btn btn-danger">
+                                    <i class="fas fa-user-slash"></i> Delete Account
+                                </button>
+                                <p class="form-hint">Deleting your account is permanent and cannot be undone.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Project Modal (at app level) -->
+    <div id="projectModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h2>New Project</h2>
+            <div class="form-group">
+                <label for="projName">Name</label>
+                <input id="projName" class="form-input" placeholder="Project name">
+            </div>
+            <div class="form-group">
+                <label for="projColor">Color (hex)</label>
+                <input id="projColor" class="form-input" placeholder="#3b82f6">
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="cancelProj">Cancel</button>
+                <button class="btn btn-primary" id="saveProj">Create</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Dialog -->
+    <div id="confirmDialog" class="modal" style="display: none;">
+        <div class="modal-content modal-small">
+            <h2 id="confirmTitle">Confirm</h2>
+            <p id="confirmMessage"></p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="confirmCancel">Cancel</button>
+                <button class="btn btn-danger" id="confirmYes">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
